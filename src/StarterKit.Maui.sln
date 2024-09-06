@@ -1,0 +1,86 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0DCD3A1C-7569-45FA-A107-8B148A6F10AA}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Desktop\.editorconfig = ..\..\..\Desktop\.editorconfig
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarterKit.Maui.App", "StarterKit.Maui.App\StarterKit.Maui.App.csproj", "{6B9C1387-3B53-4164-962C-FAAC292EC70C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarterKit.Maui.Core", "StarterKit.Maui.Core\StarterKit.Maui.Core.csproj", "{26EA81A5-7EB3-4A56-B597-2DDEF5587A4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarterKit.Maui.Features", "StarterKit.Maui.Features\StarterKit.Maui.Features.csproj", "{3988EEC3-74F3-467A-91B3-30525D8D8090}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarterKit.Maui.Common", "StarterKit.Maui.Common\StarterKit.Maui.Common.csproj", "{C399CED1-0642-4A8C-BE09-75008E7EADAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{D9BE0162-A3F4-4A0E-AD0D-93AEC36E57E3}"
+	ProjectSection(SolutionItems) = preProject
+		Configurations\CommonProjectConfigurations.target = Configurations\CommonProjectConfigurations.target
+		Configurations\configurations.dev.json = Configurations\configurations.dev.json
+		Configurations\Configurations.target = Configurations\Configurations.target
+		Configurations\ConfigurationValues.target = Configurations\ConfigurationValues.target
+		Configurations\EmbedConfigurations.target = Configurations\EmbedConfigurations.target
+		Configurations\README.md = Configurations\README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarterKit.Maui.Features.UnitTests", "StarterKit.Maui.Features.UnitTests\StarterKit.Maui.Features.UnitTests.csproj", "{D5FB4644-70BF-4BBE-A682-7451678363AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		DebugDev|Any CPU = DebugDev|Any CPU
+		ReleaseDev|Any CPU = ReleaseDev|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B9C1387-3B53-4164-962C-FAAC292EC70C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B9C1387-3B53-4164-962C-FAAC292EC70C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B9C1387-3B53-4164-962C-FAAC292EC70C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B9C1387-3B53-4164-962C-FAAC292EC70C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B9C1387-3B53-4164-962C-FAAC292EC70C}.DebugDev|Any CPU.ActiveCfg = DebugDev|Any CPU
+		{6B9C1387-3B53-4164-962C-FAAC292EC70C}.DebugDev|Any CPU.Build.0 = DebugDev|Any CPU
+		{6B9C1387-3B53-4164-962C-FAAC292EC70C}.ReleaseDev|Any CPU.ActiveCfg = ReleaseDev|Any CPU
+		{6B9C1387-3B53-4164-962C-FAAC292EC70C}.ReleaseDev|Any CPU.Build.0 = ReleaseDev|Any CPU
+		{26EA81A5-7EB3-4A56-B597-2DDEF5587A4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26EA81A5-7EB3-4A56-B597-2DDEF5587A4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26EA81A5-7EB3-4A56-B597-2DDEF5587A4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26EA81A5-7EB3-4A56-B597-2DDEF5587A4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26EA81A5-7EB3-4A56-B597-2DDEF5587A4E}.DebugDev|Any CPU.ActiveCfg = DebugDev|Any CPU
+		{26EA81A5-7EB3-4A56-B597-2DDEF5587A4E}.DebugDev|Any CPU.Build.0 = DebugDev|Any CPU
+		{26EA81A5-7EB3-4A56-B597-2DDEF5587A4E}.ReleaseDev|Any CPU.ActiveCfg = ReleaseDev|Any CPU
+		{26EA81A5-7EB3-4A56-B597-2DDEF5587A4E}.ReleaseDev|Any CPU.Build.0 = ReleaseDev|Any CPU
+		{3988EEC3-74F3-467A-91B3-30525D8D8090}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3988EEC3-74F3-467A-91B3-30525D8D8090}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3988EEC3-74F3-467A-91B3-30525D8D8090}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3988EEC3-74F3-467A-91B3-30525D8D8090}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3988EEC3-74F3-467A-91B3-30525D8D8090}.DebugDev|Any CPU.ActiveCfg = DebugDev|Any CPU
+		{3988EEC3-74F3-467A-91B3-30525D8D8090}.DebugDev|Any CPU.Build.0 = DebugDev|Any CPU
+		{3988EEC3-74F3-467A-91B3-30525D8D8090}.ReleaseDev|Any CPU.ActiveCfg = ReleaseDev|Any CPU
+		{3988EEC3-74F3-467A-91B3-30525D8D8090}.ReleaseDev|Any CPU.Build.0 = ReleaseDev|Any CPU
+		{C399CED1-0642-4A8C-BE09-75008E7EADAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C399CED1-0642-4A8C-BE09-75008E7EADAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C399CED1-0642-4A8C-BE09-75008E7EADAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C399CED1-0642-4A8C-BE09-75008E7EADAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C399CED1-0642-4A8C-BE09-75008E7EADAA}.DebugDev|Any CPU.ActiveCfg = DebugDev|Any CPU
+		{C399CED1-0642-4A8C-BE09-75008E7EADAA}.DebugDev|Any CPU.Build.0 = DebugDev|Any CPU
+		{C399CED1-0642-4A8C-BE09-75008E7EADAA}.ReleaseDev|Any CPU.ActiveCfg = ReleaseDev|Any CPU
+		{C399CED1-0642-4A8C-BE09-75008E7EADAA}.ReleaseDev|Any CPU.Build.0 = ReleaseDev|Any CPU
+		{D5FB4644-70BF-4BBE-A682-7451678363AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5FB4644-70BF-4BBE-A682-7451678363AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5FB4644-70BF-4BBE-A682-7451678363AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5FB4644-70BF-4BBE-A682-7451678363AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5FB4644-70BF-4BBE-A682-7451678363AE}.DebugDev|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5FB4644-70BF-4BBE-A682-7451678363AE}.DebugDev|Any CPU.Build.0 = Debug|Any CPU
+		{D5FB4644-70BF-4BBE-A682-7451678363AE}.ReleaseDev|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5FB4644-70BF-4BBE-A682-7451678363AE}.ReleaseDev|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		StarterKit.Maui.Shared\StarterKit.Maui.Shared.projitems*{7871dec6-d639-41ae-aaaf-952737391dc7}*SharedItemsImports = 13
+	EndGlobalSection
+EndGlobal

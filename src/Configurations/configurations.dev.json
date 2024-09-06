@@ -1,0 +1,9 @@
+{
+  "AppEnvironment": "dev",
+  "AppId": "com.example.app",
+  "AppIdSuffix": ".dev",
+  "AppName": "StarterKit",
+  "ApiBaseUrl": "https://jsonplaceholder.typicode.com",
+  "IsDeveloperFeaturesEnabled": true,
+  "LogLevel": "trace"
+}

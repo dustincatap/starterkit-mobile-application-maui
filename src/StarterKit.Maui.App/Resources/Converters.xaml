@@ -1,0 +1,5 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:converters="clr-namespace:StarterKit.Maui.Core.Presentation.Converters;assembly=StarterKit.Maui.Core">
+    <converters:ObjectToTypeConverter x:Key="ObjectToTypeConverter" />
+</ResourceDictionary>

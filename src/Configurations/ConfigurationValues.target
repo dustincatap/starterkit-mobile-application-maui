@@ -1,0 +1,57 @@
+<Project>
+    <!-- Get environment-specific configurations file only if define constants contains DEV, INTG or PROD -->
+    <PropertyGroup Condition="'$(SolutionDir)' == '' or '$(SolutionDir)' == '*undefined*'">
+        <SolutionDir>..\</SolutionDir>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(EnvAvailable)' == 'true'">
+        <ConfigurationsFile>$(SolutionDir)Configurations\configurations.$(AppEnvironment).json</ConfigurationsFile>
+    </PropertyGroup>
+
+    <Target Name="ConfigureApp" Condition="'$(EnvAvailable)' == 'true'">
+        <CallTarget Targets="_ReadConfigurationsFile" />
+        <CallTarget Targets="_UpdateAppConfiguration" />
+        <CallTarget Targets="_LogAppConfiguration" />
+    </Target>
+
+    <!-- Read configurations.json values and create an MSBuild property for each -->
+    <Target Name="_ReadConfigurationsFile">
+        <JsonPeek ContentPath="$(ConfigurationsFile)" Query="$.AppEnvironment">
+            <Output TaskParameter="Result" PropertyName="AppEnvironment" />
+        </JsonPeek>
+        <JsonPeek ContentPath="$(ConfigurationsFile)" Query="$.AppId">
+            <Output TaskParameter="Result" PropertyName="AppId" />
+        </JsonPeek>
+        <JsonPeek ContentPath="$(ConfigurationsFile)" Query="$.AppIdSuffix">
+            <Output TaskParameter="Result" PropertyName="AppIdSuffix" />
+        </JsonPeek>
+        <JsonPeek ContentPath="$(ConfigurationsFile)" Query="$.AppName">
+            <Output TaskParameter="Result" PropertyName="AppName" />
+        </JsonPeek>
+    </Target>
+
+    <Target Name="_UpdateAppConfiguration">
+        <PropertyGroup>
+            <!-- Android/iOS shared MSBuild properties according to
+            https://github.com/xamarin/xamarin-android/blob/main/Documentation/guides/OneDotNetSingleProject.md -->
+            <GenerateApplicationManifest>true</GenerateApplicationManifest>
+            <ApplicationId>$(AppId)$(AppIdSuffix)</ApplicationId>
+            <ApplicationIdGuid>2887c9e4-9029-4faf-8af5-f4e1f728f846</ApplicationIdGuid>
+            <ApplicationTitle>$(AppName)</ApplicationTitle>
+        </PropertyGroup>
+
+        <PropertyGroup Condition="$(Configuration.Contains('Debug'))">
+            <ApplicationVersion>1</ApplicationVersion>
+            <ApplicationDisplayVersion>0.0.1</ApplicationDisplayVersion>
+        </PropertyGroup>
+    </Target>
+
+    <Target Name="_LogAppConfiguration">
+        <Message
+            Text="Using Application Id `$(ApplicationId)` based on `$(AppEnvironment)` environment"
+            Importance="high" />
+        <Message
+            Text="Using Application Version `$(ApplicationDisplayVersion) ($(ApplicationVersion))`"
+            Importance="high" />
+    </Target>
+</Project>

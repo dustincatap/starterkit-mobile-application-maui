@@ -1,0 +1,16 @@
+<Project>
+    <!-- Embed environment-specific configurations file only if define constants contains DEV, INTG
+    or PROD -->
+    <PropertyGroup Condition="'$(SolutionDir)' == '' or '$(SolutionDir)' == '*undefined*'">
+        <SolutionDir>..\</SolutionDir>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(EnvAvailable)' == 'true'">
+        <ConfigurationsFile>$(SolutionDir)Configurations\configurations.$(AppEnvironment).json</ConfigurationsFile>
+    </PropertyGroup>
+
+    <ItemGroup Condition="'$(EnvAvailable)' == 'true'">
+        <None Remove="$(SolutionDir)Configurations\configurations.*.json" />
+        <EmbeddedResource Include="$(ConfigurationsFile)" LogicalName="configurations.json" />
+    </ItemGroup>
+</Project>

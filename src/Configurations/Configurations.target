@@ -1,0 +1,42 @@
+<Project>
+    <!-- Defines all environments that the project will run on -->
+    <PropertyGroup Condition="$(Configuration.Contains('Dev'))">
+        <AppEnvironment>dev</AppEnvironment>
+        <DefineConstants>$(DefineConstants);DEV;</DefineConstants>
+        <EnvAvailable>true</EnvAvailable>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="$(Configuration.Contains('UAT'))">
+        <AppEnvironment>uat</AppEnvironment>
+        <DefineConstants>$(DefineConstants);UAT</DefineConstants>
+        <EnvAvailable>true</EnvAvailable>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="$(Configuration.Contains('Prod'))">
+        <AppEnvironment>prod</AppEnvironment>
+        <DefineConstants>$(DefineConstants);PROD</DefineConstants>
+        <EnvAvailable>true</EnvAvailable>
+    </PropertyGroup>
+
+    <!-- Defines the configurations each project will support -->
+    <PropertyGroup>
+        <Configurations>DebugDev;ReleaseDev;DebugUAT;ReleaseUAT;DebugProd;ReleaseProd;</Configurations>
+        <Platforms>AnyCPU;</Platforms>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="$(Configuration.Contains('Debug'))">
+        <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
+        <DebugSymbols>true</DebugSymbols>
+        <Optimize>false</Optimize>
+    </PropertyGroup>
+    <PropertyGroup Condition="$(Configuration.Contains('Release'))">
+        <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+        <DebugSymbols>false</DebugSymbols>
+        <Optimize>true</Optimize>
+        <PublishTrimmed>true</PublishTrimmed>
+	</PropertyGroup>
+	
+    <!-- We manually reference JsonPeek library in order to use its task -->
+    <!-- For some reason, `dotnet` CLI fails if we don't explicitly reference this -->
+    <UsingTask AssemblyFile="..\..\.nuget\jsonpeek\1.2.0\build\JsonPeek.dll" TaskName="JsonPeek"/>
+</Project>

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<views:BaseContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:views="clr-namespace:StarterKit.Maui.Core.Presentation.Views;assembly=StarterKit.Maui.Core"
+                       xmlns:viewModels="clr-namespace:StarterKit.Maui.Features.Post.Presentation.ViewModels"
+                       xmlns:models="clr-namespace:StarterKit.Maui.Features.Post.Domain.Models"
+                       Title="Posts"
+                       x:Name="Root"
+                       x:TypeArguments="viewModels:PostListViewModel"
+                       x:DataType="viewModels:PostListViewModel"
+                       x:Class="StarterKit.Maui.Features.Post.Presentation.Views.PostListView">
+    <ContentPage.Triggers>
+
+        <!-- Loading State -->
+        <DataTrigger TargetType="ContentPage"
+                     Binding="{Binding State, Converter={StaticResource ObjectToTypeConverter}}"
+                     Value="{x:Type models:PostsListLoadingState}">
+            <Setter Property="Content">
+                <StackLayout VerticalOptions="Center"
+                             HorizontalOptions="Center">
+                    <ActivityIndicator VerticalOptions="Center"
+                                       HorizontalOptions="Center"
+                                       IsRunning="True" />
+                    <Label Text="Loading posts..."
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
+                </StackLayout>
+            </Setter>
+        </DataTrigger>
+
+        <!-- Loaded State -->
+        <DataTrigger TargetType="ContentPage"
+                     Binding="{Binding State, Converter={StaticResource ObjectToTypeConverter}}"
+                     Value="{x:Type models:PostsListLoadedState}">
+            <Setter Property="Content">
+                <CollectionView ItemsSource="{Binding State.Posts}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:PostEntity">
+                            <StackLayout Padding="10" Spacing="8">
+                                <Label Text="{Binding Title}"
+                                       FontAttributes="Bold"
+                                       FontSize="16" />
+                                <Label Text="{Binding Body}" Opacity="0.8" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Setter>
+        </DataTrigger>
+
+        <!-- Error State -->
+        <DataTrigger TargetType="ContentPage"
+                     Binding="{Binding State, Converter={StaticResource ObjectToTypeConverter}}"
+                     Value="{x:Type models:PostsListErrorState}">
+            <Setter Property="Content">
+                <StackLayout>
+                    <Label Text="An error occurred while loading posts."
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
+                </StackLayout>
+            </Setter>
+        </DataTrigger>
+
+    </ContentPage.Triggers>
+
+</views:BaseContentPage>

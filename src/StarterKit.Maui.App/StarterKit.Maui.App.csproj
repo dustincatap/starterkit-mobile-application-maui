@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" InitialTargets="ConfigureApp">
+
+    <PropertyGroup Condition="'$(SolutionDir)' == '' or '$(SolutionDir)' == '*undefined*'">
+        <SolutionDir>..\</SolutionDir>
+    </PropertyGroup>
+
+    <Import Project="$(SolutionDir)Configurations\Configurations.target" />
+    <Import Project="$(SolutionDir)Configurations\ConfigurationValues.target" />
+
+    <PropertyGroup>
+        <TargetFrameworks>net8.0-android;net8.0-ios;</TargetFrameworks>
+
+        <OutputType>Exe</OutputType>
+        <RootNamespace>StarterKit.Maui.App</RootNamespace>
+        <UseMaui>true</UseMaui>
+        <SingleProject>true</SingleProject>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>latestMajor</LangVersion>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">13.0</SupportedOSPlatformVersion>
+        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">26.0</SupportedOSPlatformVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="$(Configuration.Contains(Debug))">
+        <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
+        <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- App Icon -->
+        <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4"/>
+
+        <!-- Splash Screen -->
+        <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128"/>
+
+        <!-- Images -->
+        <MauiImage Include="Resources\Images\*"/>
+        <MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185"/>
+
+        <!-- Custom Fonts -->
+        <MauiFont Include="Resources\Fonts\*"/>
+
+        <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+        <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Riok.Mapperly" Version="3.6.0" />
+        <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)"/>
+        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\StarterKit.Maui.Common\StarterKit.Maui.Common.csproj"/>
+        <ProjectReference Include="..\StarterKit.Maui.Core\StarterKit.Maui.Core.csproj"/>
+        <ProjectReference Include="..\StarterKit.Maui.Features\StarterKit.Maui.Features.csproj"/>
+    </ItemGroup>
+
+</Project>
