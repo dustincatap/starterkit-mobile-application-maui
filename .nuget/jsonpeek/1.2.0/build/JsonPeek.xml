@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>JsonPeek</name>
+    </assembly>
+    <members>
+        <member name="T:JsonPeek">
+            <summary>
+            Returns values as specified by a JSONPath Query from a JSON file.
+            </summary>
+        </member>
+        <member name="P:JsonPeek.Content">
+            <summary>
+            Specifies the JSON input as a string.
+            </summary>
+        </member>
+        <member name="P:JsonPeek.ContentPath">
+            <summary>
+            Specifies the JSON input as a file path.
+            </summary>
+        </member>
+        <member name="P:JsonPeek.Empty">
+            <summary>
+            Specifies an optional value to use as a replacement for 
+            empty values matched in JSON. This allows distinguishing 
+            non-matching queries versus queries that match nodes but 
+            contain an empty value.
+            </summary>
+        </member>
+        <member name="P:JsonPeek.Query">
+            <summary>
+            Specifies the JSONPath query.
+            </summary>
+        </member>
+        <member name="P:JsonPeek.Result">
+            <summary>
+            Contains the results that are returned by the task.
+            </summary>
+        </member>
+        <member name="M:JsonPeek.Execute">
+            <summary>
+            Executes the <see cref="P:JsonPeek.Query"/> against either the 
+            <see cref="P:JsonPeek.Content"/> or <see cref="P:JsonPeek.ContentPath"/> JSON.
+            </summary>
+        </member>
+    </members>
+</doc>

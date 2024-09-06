@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>JsonPeek</id>
+    <version>1.2.0</version>
+    <authors>Daniel Cazzulino</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <icon>icon.png</icon>
+    <readme>readme.md</readme>
+    <projectUrl>https://clarius.org/json</projectUrl>
+    <description>MSBuild task to read values from JSON using JSONPath.</description>
+    <releaseNotes>https://github.com/devlooped/json/blob/main/changelog.md</releaseNotes>
+    <copyright>Copyright (C) Daniel Cazzulino and Contributors. All rights reserved.</copyright>
+    <repository type="git" url="https://github.com/devlooped/json" branch="v1.2.0" commit="12c966072edb8ec106374ea06115b2c048645d00" />
+  </metadata>
+</package>
