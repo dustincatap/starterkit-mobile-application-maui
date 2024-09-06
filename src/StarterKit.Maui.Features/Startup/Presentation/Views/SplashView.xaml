@@ -4,10 +4,14 @@
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                        xmlns:views="clr-namespace:StarterKit.Maui.Core.Presentation.Views;assembly=StarterKit.Maui.Core"
                        xmlns:viewModels="clr-namespace:StarterKit.Maui.Features.Startup.Presentation.ViewModels;assembly=StarterKit.Maui.Features"
+                       xmlns:il8n="clr-namespace:StarterKit.Maui.Common.Localization;assembly=StarterKit.Maui.Common"
                        x:TypeArguments="viewModels:SplashViewModel"
                        x:DataType="viewModels:SplashViewModel"
-                       x:Class="StarterKit.Maui.Features.Startup.Presentation.Views.SplashView">
+                       x:Class="StarterKit.Maui.Features.Startup.Presentation.Views.SplashView"
+                       Title="{x:Static il8n:Localization.SplashTitle}">
+
     <ActivityIndicator VerticalOptions="Center"
                        HorizontalOptions="Center"
                        IsRunning="True" />
+
 </views:BaseContentPage>

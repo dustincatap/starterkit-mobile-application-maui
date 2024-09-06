@@ -5,11 +5,11 @@
                        xmlns:views="clr-namespace:StarterKit.Maui.Core.Presentation.Views;assembly=StarterKit.Maui.Core"
                        xmlns:viewModels="clr-namespace:StarterKit.Maui.Features.Post.Presentation.ViewModels"
                        xmlns:models="clr-namespace:StarterKit.Maui.Features.Post.Domain.Models"
-                       Title="Posts"
-                       x:Name="Root"
+                       xmlns:il8n="clr-namespace:StarterKit.Maui.Common.Localization;assembly=StarterKit.Maui.Common"
                        x:TypeArguments="viewModels:PostListViewModel"
                        x:DataType="viewModels:PostListViewModel"
-                       x:Class="StarterKit.Maui.Features.Post.Presentation.Views.PostListView">
+                       x:Class="StarterKit.Maui.Features.Post.Presentation.Views.PostListView"
+                       Title="{x:Static il8n:Localization.PostListTitle}">
     <ContentPage.Triggers>
 
         <!-- Loading State -->
