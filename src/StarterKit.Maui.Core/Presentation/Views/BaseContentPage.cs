@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using StarterKit.Maui.Core.Infrastructure;
-using StarterKit.Maui.Core.Infrastructure.Navigation;
+using StarterKit.Maui.Core.Presentation.Navigation;
 
 namespace StarterKit.Maui.Core.Presentation.Views;
 

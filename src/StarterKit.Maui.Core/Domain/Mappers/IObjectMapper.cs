@@ -1,6 +1,8 @@
 ﻿namespace StarterKit.Maui.Core.Domain.Mappers;
 
-public interface IObjectMapper<in TFrom, out TTo>
+public interface IObjectMapper<TFrom, TTo>
 {
-    TTo Map(TFrom from);
+    TTo Map(TFrom source);
+    
+    TFrom Map(TTo source);
 }

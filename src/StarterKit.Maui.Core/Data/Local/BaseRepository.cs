@@ -23,9 +23,9 @@ public abstract class BaseRepository<T> : IRepository<T> where T : class
     // and https://learn.microsoft.com/en-us/ef/core/what-is-new/ef-core-3.x/breaking-changes#linq-queries-are-no-longer-evaluated-on-the-client
     private IEnumerable<T> Entities => CheckForOutdatedDatabase(dbSet => dbSet.ToList());
 
-    public T? Get(Predicate<T> predicate)
+    public T? Get(Predicate<T> filter)
     {
-        return Entities.FirstOrDefault(x => predicate(x));
+        return Entities.FirstOrDefault(x => filter(x));
     }
 
     public IEnumerable<T> GetAll()
@@ -33,9 +33,9 @@ public abstract class BaseRepository<T> : IRepository<T> where T : class
         return Entities;
     }
 
-    public IEnumerable<T> GetAll(Predicate<T> predicate)
+    public IEnumerable<T> GetAll(Predicate<T> filter)
     {
-        return Entities.Where(x => predicate(x));
+        return Entities.Where(x => filter(x));
     }
 
     public void Add(T entity)
@@ -68,9 +68,9 @@ public abstract class BaseRepository<T> : IRepository<T> where T : class
         CheckForOutdatedDatabase(dbSet => dbSet.RemoveRange(entities));
     }
 
-    public int SaveChanges()
+    public Task<int> SaveChanges()
     {
-        return CheckForOutdatedDatabase(_ => _context.SaveChanges());
+        return CheckForOutdatedDatabase(_ => _context.SaveChangesAsync());
     }
 
     private void CheckForOutdatedDatabase(Action<DbSet<T>> action)

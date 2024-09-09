@@ -17,8 +17,6 @@ public class AppDbContext : DbContext
         _pathProvider = pathProvider;
 
         Batteries_V2.Init();
-
-        Database.EnsureCreated();
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

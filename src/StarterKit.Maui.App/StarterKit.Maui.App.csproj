@@ -6,6 +6,7 @@
 
     <Import Project="$(SolutionDir)Configurations\Configurations.target" />
     <Import Project="$(SolutionDir)Configurations\ConfigurationValues.target" />
+    <Import Project="$(SolutionDir)Configurations\EmbedConfigurations.target" />
 
     <PropertyGroup>
         <TargetFrameworks>net8.0-android;net8.0-ios;</TargetFrameworks>
@@ -18,12 +19,15 @@
         <Nullable>enable</Nullable>
         <LangVersion>latestMajor</LangVersion>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <!-- Ignore errors for unrecognized binding paths -->
+        <NoWarn>XC0022;</NoWarn>
 
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">13.0</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">26.0</SupportedOSPlatformVersion>
     </PropertyGroup>
 
-    <PropertyGroup Condition="$(Configuration.Contains(Debug))">
+    <PropertyGroup Condition="$(Configuration.Contains(Debug)) And $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+        <RuntimeIdentifiers>android-arm;android-arm64;android-x86;android-x64</RuntimeIdentifiers>
         <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
         <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
     </PropertyGroup>
@@ -47,9 +51,11 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="CommunityToolkit.Maui" Version="9.0.3" />
+        <PackageReference Include="Equatable.Generator" Version="1.1.0" PrivateAssets="all" />
         <PackageReference Include="Riok.Mapperly" Version="3.6.0" />
-        <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)"/>
-        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)"/>
+        <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.82" />
+        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.82"/>
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0"/>
     </ItemGroup>
 

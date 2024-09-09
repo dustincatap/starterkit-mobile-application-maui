@@ -5,7 +5,6 @@
     </PropertyGroup>
 
     <Import Project="$(SolutionDir)Configurations\Configurations.target" />
-    <Import Project="$(SolutionDir)Configurations\EmbedConfigurations.target" />
     
     <PropertyGroup>
         <TargetFrameworks>net8.0;net8.0-android;net8.0-ios;</TargetFrameworks>
@@ -24,12 +23,18 @@
     <ItemGroup>
         <PackageReference Include="Autofac" Version="8.1.0" />
         <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
+        <PackageReference Include="CommunityToolkit.Maui" Version="9.0.3" />
+        <PackageReference Include="Equatable.Generator" Version="1.1.0" PrivateAssets="all" />
         <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="8.0.8" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="8.0.8" />
-        <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)"/>
-        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)"/>
+        <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.82" />
+        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.82"/>
         <PackageReference Include="Refit" Version="7.1.2" />
         <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\StarterKit.Maui.Common\StarterKit.Maui.Common.csproj" />
     </ItemGroup>
 
 </Project>

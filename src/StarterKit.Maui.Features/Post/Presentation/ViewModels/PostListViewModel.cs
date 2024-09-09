@@ -19,7 +19,7 @@ public partial class PostListViewModel : ObservableObject, IInitialize
         _logger = logger;
         _postService = postService;
     }
-    
+
     [ObservableProperty]
     private PostListState _state = new PostsListLoadingState();
 

@@ -2,7 +2,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using StarterKit.Maui.Common.Constants;
 using StarterKit.Maui.Common.Utilities;
-using StarterKit.Maui.Core.Infrastructure.Navigation;
+using StarterKit.Maui.Core.Presentation.Navigation;
 using StarterKit.Maui.Features.Startup.Presentation.ViewModels;
 
 namespace StarterKit.Maui.Features.UnitTests.Startup.Presentation.ViewModels;

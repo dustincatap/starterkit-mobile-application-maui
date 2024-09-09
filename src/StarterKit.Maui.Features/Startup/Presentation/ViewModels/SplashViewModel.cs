@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using StarterKit.Maui.Common.Constants;
 using StarterKit.Maui.Common.Utilities;
-using StarterKit.Maui.Core.Infrastructure.Navigation;
+using StarterKit.Maui.Core.Presentation.Navigation;
 using StarterKit.Maui.Core.Presentation.ViewModels;
 
 namespace StarterKit.Maui.Features.Startup.Presentation.ViewModels;
@@ -20,7 +20,7 @@ public class SplashViewModel : IInitialize
         _navigationService = navigationService;
         _taskUtils = taskUtils;
     }
-
+    
     public async Task OnInitialize(object? parameter = null)
     {
         _logger.LogInformation("Initializing splash screen");

@@ -1,6 +1,6 @@
 ﻿namespace StarterKit.Maui.Core.Domain.Models;
 
-public abstract class Result<T>
+public abstract record Result<T>
 {
     public bool IsSuccess { get; }
 
@@ -10,7 +10,7 @@ public abstract class Result<T>
     }
 }
 
-public abstract class Result
+public abstract record Result
 {
     public bool IsSuccess { get; }
 
@@ -20,14 +20,14 @@ public abstract class Result
     }
 }
 
-public sealed class Success : Result
+public sealed record Success : Result
 {
     public Success() : base(true)
     {
     }
 }
 
-public sealed class Success<T> : Result<T>
+public sealed record Success<T> : Result<T>
 {
     public T Value { get; }
 
@@ -37,7 +37,7 @@ public sealed class Success<T> : Result<T>
     }
 }
 
-public sealed class Failure<T> : Result<T>
+public sealed record Failure<T> : Result<T>
 {
     public Exception Exception { get; }
 
@@ -47,7 +47,7 @@ public sealed class Failure<T> : Result<T>
     }
 }
 
-public sealed class Failure : Result
+public sealed record Failure : Result
 {
     public Exception Exception { get; }
 

@@ -2,7 +2,6 @@
 using StarterKit.Maui.Common.Constants;
 using StarterKit.Maui.Core.Data.Local;
 using StarterKit.Maui.Core.Data.Remote;
-using StarterKit.Maui.Core.Domain.Mappers;
 using StarterKit.Maui.Features.Post.Data.Local;
 using StarterKit.Maui.Features.Post.Data.Remote;
 using StarterKit.Maui.Features.Post.Domain.Mappers;
@@ -36,7 +35,7 @@ public class FeaturesModule : Module
 
     private static void RegisterMappers(ContainerBuilder builder)
     {
-        builder.RegisterType<PostMapper>().As<IObjectMapper<PostDataContract, PostEntity>>().SingleInstance();
+        builder.RegisterType<PostMapper>().As<IPostMapper>().SingleInstance();
     }
 
     private static void RegisterServices(ContainerBuilder builder)

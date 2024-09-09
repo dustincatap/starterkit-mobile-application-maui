@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:StarterKit.Maui.Features.Post.Domain.Models"
+             x:Class="StarterKit.Maui.Features.Post.Presentation.Views.PostListViewContent"
+             x:DataType="models:PostsListLoadedState">
+
+    <CollectionView ItemsSource="{Binding Posts}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:PostEntity">
+                <StackLayout Padding="10" Spacing="8">
+                    <Label Text="{Binding Title}"
+                           FontAttributes="Bold"
+                           FontSize="16" />
+                    <Label Text="{Binding Body}" Opacity="0.8" />
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+
+</ContentView>

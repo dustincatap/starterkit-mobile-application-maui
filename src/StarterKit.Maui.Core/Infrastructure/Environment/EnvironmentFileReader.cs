@@ -4,8 +4,6 @@ namespace StarterKit.Maui.Core.Infrastructure.Environment;
 
 public class EnvironmentFileReader
 {
-    private const string EnvironmentFileName = "configurations.json";
-
     private readonly IEmbeddedResourceReader _embeddedResourceReader;
 
     public EnvironmentFileReader(IEmbeddedResourceReader embeddedResourceReader)
@@ -13,10 +11,10 @@ public class EnvironmentFileReader
         _embeddedResourceReader = embeddedResourceReader;
     }
 
-    public IEnvironmentVariables Read()
+    public IEnvironmentVariables Read(string resourceName, Type typeAssembly)
     {
-        EnvironmentVariables? environmentVariables = _embeddedResourceReader
-            .ReadAs<EnvironmentVariables>(EnvironmentFileName, typeof(EnvironmentFileReader));
+        EnvironmentVariables? environmentVariables =
+            _embeddedResourceReader.ReadAs<EnvironmentVariables>(resourceName, typeAssembly);
 
         if (environmentVariables == null)
         {

@@ -2,7 +2,6 @@
 using Moq;
 using Shouldly;
 using StarterKit.Maui.Core.Data.Local;
-using StarterKit.Maui.Core.Domain.Mappers;
 using StarterKit.Maui.Core.Domain.Models;
 using StarterKit.Maui.Features.Post.Data.Remote;
 using StarterKit.Maui.Features.Post.Domain.Mappers;
@@ -17,7 +16,7 @@ public class PostServiceTest
     private Mock<ILogger<PostService>> _loggerMock;
     private Mock<IPostApi> _postApiMock;
     private Mock<IRepository<PostEntity>> _postRepositoryMock;
-    private Mock<IObjectMapper<PostDataContract, PostEntity>> _postMapperMock;
+    private Mock<IPostMapper> _postMapperMock;
 
     [SetUp]
     public void Setup()
@@ -25,7 +24,7 @@ public class PostServiceTest
         _loggerMock = new Mock<ILogger<PostService>>();
         _postApiMock = new Mock<IPostApi>();
         _postRepositoryMock = new Mock<IRepository<PostEntity>>();
-        _postMapperMock = new Mock<IObjectMapper<PostDataContract, PostEntity>>();
+        _postMapperMock = new Mock<IPostMapper>();
     }
 
     private PostService CreateUnitUnderTest()

@@ -16,17 +16,19 @@
         <LangVersion>latestMajor</LangVersion>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <!-- Ignore errors for unrecognized binding paths -->
-        <NoWarn>XC0022</NoWarn>
+        <NoWarn>XC0022;</NoWarn>
 
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">13.0</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">26.0</SupportedOSPlatformVersion>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="CommunityToolkit.Maui" Version="9.0.3" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.0"/>
+        <PackageReference Include="Equatable.Generator" Version="1.1.0" PrivateAssets="all" />
         <PackageReference Include="Riok.Mapperly" Version="3.6.0"/>
-        <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)"/>
-        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)"/>
+        <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.82" />
+        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.82"/>
         <PackageReference Include="Refit" Version="7.1.2"/>
     </ItemGroup>
 
