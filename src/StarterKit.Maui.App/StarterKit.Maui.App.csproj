@@ -4,9 +4,9 @@
         <SolutionDir>..\</SolutionDir>
     </PropertyGroup>
 
-    <Import Project="$(SolutionDir)Configurations\Configurations.target" />
-    <Import Project="$(SolutionDir)Configurations\ConfigurationValues.target" />
-    <Import Project="$(SolutionDir)Configurations\EmbedConfigurations.target" />
+    <Import Project="$(SolutionDir)Configurations\Configurations.target"/>
+    <Import Project="$(SolutionDir)Configurations\ConfigurationValues.target"/>
+    <Import Project="$(SolutionDir)Configurations\EmbedConfigurations.target"/>
 
     <PropertyGroup>
         <TargetFrameworks>net8.0-android;net8.0-ios;</TargetFrameworks>
@@ -32,6 +32,15 @@
         <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
     </PropertyGroup>
 
+    <PropertyGroup Condition="$(Configuration.Contains(Debug)) And $([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
+        <MtouchDebug>true</MtouchDebug>
+        <MtouchLink>SdkOnly</MtouchLink>
+        <MtouchInterpreter>all</MtouchInterpreter>
+        <UseInterpreter>False</UseInterpreter>
+        <PublishAot>False</PublishAot>
+        <RunAOTCompilation>False</RunAOTCompilation>
+    </PropertyGroup>
+
     <ItemGroup>
         <!-- App Icon -->
         <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4"/>
@@ -51,10 +60,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="CommunityToolkit.Maui" Version="9.0.3" />
-        <PackageReference Include="Equatable.Generator" Version="1.1.0" PrivateAssets="all" />
-        <PackageReference Include="Riok.Mapperly" Version="3.6.0" />
-        <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.82" />
+        <PackageReference Include="CommunityToolkit.Maui" Version="9.0.3"/>
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.1" />
+        <PackageReference Include="Equatable.Generator" Version="1.1.0" PrivateAssets="all"/>
+        <PackageReference Include="Riok.Mapperly" Version="3.6.0"/>
+        <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.82"/>
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.82"/>
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0"/>
     </ItemGroup>
