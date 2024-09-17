@@ -19,6 +19,6 @@ public interface IRepository<T> where T : class
     void Remove(T entity);
 
     void RemoveAll(IEnumerable<T> entities);
-    
+
     Task<int> SaveChanges();
 }

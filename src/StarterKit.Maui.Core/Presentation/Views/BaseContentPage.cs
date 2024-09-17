@@ -12,7 +12,7 @@ public abstract class BaseContentPage<T> : ContentPage where T : class
     protected BaseContentPage()
     {
         _navigationService = ServiceLocator.GetService<INavigationService>();
-        
+
         BindingContext = ServiceLocator.GetService<T>();
 
         Shell.SetBackButtonBehavior(this, new BackButtonBehavior
@@ -27,7 +27,7 @@ public abstract class BaseContentPage<T> : ContentPage where T : class
         {
             return false;
         }
-        
+
         _navigationService.Pop();
 
         return true;

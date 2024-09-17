@@ -9,10 +9,10 @@ public interface IEnvironmentVariables
     string AppIdSuffix { get; }
 
     AppEnvironment AppEnvironment { get; }
-    
+
     LogLevel LogLevel { get; }
-    
+
     bool IsDeveloperFeaturesEnabled { get; }
-    
+
     string ApiBaseUrl { get; }
 }

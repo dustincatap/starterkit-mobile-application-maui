@@ -9,9 +9,9 @@ public interface INavigationService
     event EventHandler<string> Popped;
 
     string CurrentViewName { get; }
-    
+
     Task<Result> PushToNewRoot(string viewName);
-    
+
     Task<Result> PushToNewRoot(string viewName, object? parameter);
 
     Task<Result> Push(string viewName, object? parameter = null);
@@ -21,6 +21,6 @@ public interface INavigationService
     Task<Result> Pop();
 
     Task<Result> Pop(object? result);
-    
+
     Task<Result> PopToRoot();
 }

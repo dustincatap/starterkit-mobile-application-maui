@@ -34,7 +34,7 @@ public class EmbeddedResourceReader : IEmbeddedResourceReader
     {
         string value = ReadAsString(name, assemblyClass);
         T? deserializedValue = JsonSerializer.Deserialize<T>(value);
-            
+
         return deserializedValue;
     }
 }

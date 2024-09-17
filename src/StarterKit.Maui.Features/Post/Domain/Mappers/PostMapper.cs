@@ -9,6 +9,6 @@ namespace StarterKit.Maui.Features.Post.Domain.Mappers;
 public partial class PostMapper : IPostMapper
 {
     public partial PostEntity Map(PostDataContract source);
-    
+
     public partial PostDataContract Map(PostEntity source);
 }

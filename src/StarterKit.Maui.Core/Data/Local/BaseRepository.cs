@@ -21,7 +21,7 @@ public abstract class BaseRepository<T> : IRepository<T> where T : class
     // Enumerate entities as another collection if we are going to use LINQ
     // See https://learn.microsoft.com/en-us/answers/questions/530674/resolve-exception-firstordefault-could-not-be-tran
     // and https://learn.microsoft.com/en-us/ef/core/what-is-new/ef-core-3.x/breaking-changes#linq-queries-are-no-longer-evaluated-on-the-client
-    private IEnumerable<T> Entities => CheckForOutdatedDatabase(dbSet => dbSet.ToList());
+    private IEnumerable<T> Entities => TryExecute(dbSet => dbSet.ToList());
 
     public T? Get(Predicate<T> filter)
     {
@@ -40,57 +40,57 @@ public abstract class BaseRepository<T> : IRepository<T> where T : class
 
     public void Add(T entity)
     {
-        CheckForOutdatedDatabase(dbSet => dbSet.Add(entity));
+        TryExecute(dbSet => dbSet.Add(entity));
     }
 
     public void AddAll(IEnumerable<T> entities)
     {
-        CheckForOutdatedDatabase(dbSet => dbSet.AddRange(entities));
+        TryExecute(dbSet => dbSet.AddRange(entities));
     }
 
     public void Update(T entity)
     {
-        CheckForOutdatedDatabase(dbSet => dbSet.Update(entity));
+        TryExecute(dbSet => dbSet.Update(entity));
     }
 
     public void UpdateAll(IEnumerable<T> entities)
     {
-        CheckForOutdatedDatabase(dbSet => dbSet.UpdateRange(entities));
+        TryExecute(dbSet => dbSet.UpdateRange(entities));
     }
 
     public void Remove(T entity)
     {
-        CheckForOutdatedDatabase(dbSet => dbSet.Remove(entity));
+        TryExecute(dbSet => dbSet.Remove(entity));
     }
 
     public void RemoveAll(IEnumerable<T> entities)
     {
-        CheckForOutdatedDatabase(dbSet => dbSet.RemoveRange(entities));
+        TryExecute(dbSet => dbSet.RemoveRange(entities));
     }
 
     public Task<int> SaveChanges()
     {
-        return CheckForOutdatedDatabase(_ => _context.SaveChangesAsync());
+        return TryExecute(_ => _context.SaveChangesAsync());
     }
 
-    private void CheckForOutdatedDatabase(Action<DbSet<T>> action)
+    private void TryExecute(Action<DbSet<T>> action)
     {
-        CheckForOutdatedDatabase(dbSet =>
+        TryExecute(dbSet =>
         {
             action.Invoke(dbSet);
             return true;
         });
     }
 
-    private TResult CheckForOutdatedDatabase<TResult>(Func<DbSet<T>, TResult> action)
+    private TResult TryExecute<TResult>(Func<DbSet<T>, TResult> action)
     {
         try
         {
             return action.Invoke(DbSet);
         }
-        catch (SqliteException ex) when (ex.SqliteErrorCode == SqliteGenericErrorCode)
+        catch (SqliteException ex)
         {
-            throw new InvalidOperationException("The database is outdated.", ex);
+            throw new InvalidOperationException("An error occurred while executing the db action", ex);
         }
     }
 }

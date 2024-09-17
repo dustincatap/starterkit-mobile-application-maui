@@ -3,6 +3,6 @@
 public interface IObjectMapper<TFrom, TTo>
 {
     TTo Map(TFrom source);
-    
+
     TFrom Map(TTo source);
 }

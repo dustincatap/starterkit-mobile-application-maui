@@ -16,6 +16,6 @@ public class EnvironmentVariables : IEnvironmentVariables
     public required LogLevel LogLevel { get; init; }
 
     public required bool IsDeveloperFeaturesEnabled { get; init; }
-    
+
     public required string ApiBaseUrl { get; init; }
 }

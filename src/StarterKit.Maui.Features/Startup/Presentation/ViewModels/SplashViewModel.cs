@@ -20,7 +20,7 @@ public class SplashViewModel : IInitialize
         _navigationService = navigationService;
         _taskUtils = taskUtils;
     }
-    
+
     public async Task OnInitialize(object? parameter = null)
     {
         _logger.LogInformation("Initializing splash screen");

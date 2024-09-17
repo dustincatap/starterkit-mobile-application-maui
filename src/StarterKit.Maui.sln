@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0DCD3A1C-7569-45FA-A107-8B148A6F10AA}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\Desktop\.editorconfig = ..\..\..\Desktop\.editorconfig
+		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarterKit.Maui.App", "StarterKit.Maui.App\StarterKit.Maui.App.csproj", "{6B9C1387-3B53-4164-962C-FAAC292EC70C}"
