@@ -1,6 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Riok.Mapperly.Abstractions;
+﻿using Riok.Mapperly.Abstractions;
 using StarterKit.Maui.Features.Post.Domain.Models;
+using System.Diagnostics.CodeAnalysis;
 
 namespace StarterKit.Maui.Features.Post.Domain.Mappers;
 
@@ -8,7 +8,7 @@ namespace StarterKit.Maui.Features.Post.Domain.Mappers;
 [ExcludeFromCodeCoverage]
 public partial class PostMapper : IPostMapper
 {
-    public partial PostEntity Map(PostDataContract source);
+	public partial PostEntity Map(PostDataContract source);
 
-    public partial PostDataContract Map(PostEntity source);
+	public partial PostDataContract Map(PostEntity source);
 }

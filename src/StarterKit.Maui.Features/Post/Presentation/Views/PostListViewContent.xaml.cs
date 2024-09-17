@@ -2,8 +2,8 @@
 
 public partial class PostListViewContent
 {
-    public PostListViewContent()
-    {
-        InitializeComponent();
-    }
+	public PostListViewContent()
+	{
+		InitializeComponent();
+	}
 }

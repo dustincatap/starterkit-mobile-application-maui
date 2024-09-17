@@ -12,44 +12,44 @@ namespace StarterKit.Maui.App.Container.Modules;
 
 public class CoreModule : Module
 {
-    protected override void Load(ContainerBuilder builder)
-    {
-        base.Load(builder);
+	protected override void Load(ContainerBuilder builder)
+	{
+		base.Load(builder);
 
-        RegisterInfrastructure(builder);
-        RegisterData(builder);
-        RegisterPresentation(builder);
-    }
+		RegisterInfrastructure(builder);
+		RegisterData(builder);
+		RegisterPresentation(builder);
+	}
 
-    private static void RegisterData(ContainerBuilder builder)
-    {
-        builder.RegisterType<HttpMessageHandlerProvider>().As<IHttpMessageHandlerProvider>()
-            .SingleInstance();
+	private static void RegisterData(ContainerBuilder builder)
+	{
+		builder.RegisterType<HttpMessageHandlerProvider>().As<IHttpMessageHandlerProvider>()
+			.SingleInstance();
 
-        builder.RegisterType<HttpClientProvider>().As<HttpClientProvider>().SingleInstance();
+		builder.RegisterType<HttpClientProvider>().As<HttpClientProvider>().SingleInstance();
 
-        builder.RegisterType<AppDbContext>().As<DbContext>().InstancePerDependency();
-    }
+		builder.RegisterType<AppDbContext>().As<DbContext>().InstancePerDependency();
+	}
 
-    private static void RegisterInfrastructure(ContainerBuilder builder)
-    {
-        builder.RegisterType<EmbeddedResourceReader>().As<IEmbeddedResourceReader>().SingleInstance();
+	private static void RegisterInfrastructure(ContainerBuilder builder)
+	{
+		builder.RegisterType<EmbeddedResourceReader>().As<IEmbeddedResourceReader>().SingleInstance();
 
-        builder.Register(c =>
-            {
-                EnvironmentFileReader envFileReader = new EnvironmentFileReader(c.Resolve<IEmbeddedResourceReader>());
-                IEnvironmentVariables env = envFileReader.Read("configurations.json", typeof(CoreModule));
-                return env;
-            })
-            .As<IEnvironmentVariables>()
-            .SingleInstance();
+		builder.Register(c =>
+			{
+				EnvironmentFileReader envFileReader = new EnvironmentFileReader(c.Resolve<IEmbeddedResourceReader>());
+				IEnvironmentVariables env = envFileReader.Read("configurations.json", typeof(CoreModule));
+				return env;
+			})
+			.As<IEnvironmentVariables>()
+			.SingleInstance();
 
-        builder.RegisterType<PathProvider>().As<IPathProvider>().SingleInstance();
-    }
+		builder.RegisterType<PathProvider>().As<IPathProvider>().SingleInstance();
+	}
 
-    private static void RegisterPresentation(ContainerBuilder builder)
-    {
-        builder.RegisterType<NavigationService>().As<INavigationService>().SingleInstance();
-        builder.RegisterType<DialogService>().As<IDialogService>().SingleInstance();
-    }
+	private static void RegisterPresentation(ContainerBuilder builder)
+	{
+		builder.RegisterType<NavigationService>().As<INavigationService>().SingleInstance();
+		builder.RegisterType<DialogService>().As<IDialogService>().SingleInstance();
+	}
 }

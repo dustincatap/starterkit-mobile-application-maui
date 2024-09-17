@@ -2,8 +2,8 @@
 
 public class TaskUtils : ITaskUtils
 {
-    public async Task Delay(int milliseconds)
-    {
-        await Task.Delay(milliseconds);
-    }
+	public async Task Delay(int milliseconds)
+	{
+		await Task.Delay(milliseconds);
+	}
 }

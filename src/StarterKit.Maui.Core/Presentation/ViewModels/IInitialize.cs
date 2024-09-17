@@ -2,5 +2,5 @@
 
 public interface IInitialize
 {
-    Task OnInitialize(object? parameter = null);
+	Task OnInitialize(object? parameter = null);
 }

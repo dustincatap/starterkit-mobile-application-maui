@@ -2,7 +2,7 @@
 
 public enum AppEnvironment
 {
-    Dev,
-    Uat,
-    Prod
+	Dev,
+	Uat,
+	Prod
 }

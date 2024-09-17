@@ -6,14 +6,14 @@ namespace StarterKit.Maui.App;
 
 public partial class App
 {
-    public App()
-    {
-        InitializeComponent();
+	public App()
+	{
+		InitializeComponent();
 
-        INavigationService navigationService = ServiceLocator.GetService<INavigationService>();
+		INavigationService navigationService = ServiceLocator.GetService<INavigationService>();
 
-        MainPage = new NavigationPage();
+		MainPage = new NavigationPage();
 
-        navigationService.PushToNewRoot(ViewNames.Splash);
-    }
+		navigationService.PushToNewRoot(ViewNames.Splash);
+	}
 }

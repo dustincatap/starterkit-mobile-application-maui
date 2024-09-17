@@ -4,15 +4,15 @@ namespace StarterKit.Maui.Core.Infrastructure.Environment;
 
 public interface IEnvironmentVariables
 {
-    string AppId { get; }
+	string AppId { get; }
 
-    string AppIdSuffix { get; }
+	string AppIdSuffix { get; }
 
-    AppEnvironment AppEnvironment { get; }
+	AppEnvironment AppEnvironment { get; }
 
-    LogLevel LogLevel { get; }
+	LogLevel LogLevel { get; }
 
-    bool IsDeveloperFeaturesEnabled { get; }
+	bool IsDeveloperFeaturesEnabled { get; }
 
-    string ApiBaseUrl { get; }
+	string ApiBaseUrl { get; }
 }

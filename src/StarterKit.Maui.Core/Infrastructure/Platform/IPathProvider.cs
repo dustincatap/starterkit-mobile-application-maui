@@ -2,6 +2,6 @@
 
 public interface IPathProvider
 {
-    string CacheFolderPath { get; }
-    string DatabasePath { get; }
+	string CacheFolderPath { get; }
+	string DatabasePath { get; }
 }

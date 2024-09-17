@@ -2,7 +2,7 @@
 
 public interface IObjectMapper<TFrom, TTo>
 {
-    TTo Map(TFrom source);
+	TTo Map(TFrom source);
 
-    TFrom Map(TTo source);
+	TFrom Map(TTo source);
 }

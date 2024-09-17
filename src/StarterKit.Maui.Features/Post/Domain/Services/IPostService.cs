@@ -5,5 +5,5 @@ namespace StarterKit.Maui.Features.Post.Domain.Services;
 
 public interface IPostService
 {
-    Task<Result<IEnumerable<PostEntity>>> GetPosts();
+	Task<Result<IEnumerable<PostEntity>>> GetPosts();
 }

@@ -5,6 +5,6 @@ namespace StarterKit.Maui.Features.Post.Data.Remote;
 
 public interface IPostApi
 {
-    [Get("/posts")]
-    Task<IEnumerable<PostDataContract>> GetPosts();
+	[Get("/posts")]
+	Task<IEnumerable<PostDataContract>> GetPosts();
 }

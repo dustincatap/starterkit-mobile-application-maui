@@ -6,7 +6,7 @@ namespace StarterKit.Maui.Features.Post.Data.Local;
 
 public class PostRepository : BaseRepository<PostEntity>
 {
-    public PostRepository(DbContext context) : base(context)
-    {
-    }
+	public PostRepository(DbContext context) : base(context)
+	{
+	}
 }

@@ -2,23 +2,23 @@
 
 public interface IRepository<T> where T : class
 {
-    T? Get(Predicate<T> filter);
+	T? Get(Predicate<T> filter);
 
-    IEnumerable<T> GetAll();
+	IEnumerable<T> GetAll();
 
-    IEnumerable<T> GetAll(Predicate<T> filter);
+	IEnumerable<T> GetAll(Predicate<T> filter);
 
-    void Add(T entity);
+	void Add(T entity);
 
-    void AddAll(IEnumerable<T> entities);
+	void AddAll(IEnumerable<T> entities);
 
-    void Update(T entity);
+	void Update(T entity);
 
-    void UpdateAll(IEnumerable<T> entities);
+	void UpdateAll(IEnumerable<T> entities);
 
-    void Remove(T entity);
+	void Remove(T entity);
 
-    void RemoveAll(IEnumerable<T> entities);
+	void RemoveAll(IEnumerable<T> entities);
 
-    Task<int> SaveChanges();
+	Task<int> SaveChanges();
 }
