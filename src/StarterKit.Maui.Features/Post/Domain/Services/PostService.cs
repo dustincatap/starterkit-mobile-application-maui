@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using StarterKit.Maui.Core.Data.Local;
 using StarterKit.Maui.Core.Domain.Models;
+using StarterKit.Maui.Core.Infrastructure.Platform;
 using StarterKit.Maui.Features.Post.Data.Remote;
 using StarterKit.Maui.Features.Post.Domain.Mappers;
 using StarterKit.Maui.Features.Post.Domain.Models;
@@ -13,31 +14,42 @@ public class PostService : IPostService
 	private readonly IPostApi _postApi;
 	private readonly IRepository<PostEntity> _postRepository;
 	private readonly IPostMapper _postMapper;
+	private readonly IConnectivityService _connectivityService;
 
 	public PostService(ILogger<PostService> logger,
 		IPostApi postApi,
 		IRepository<PostEntity> postRepository,
-		IPostMapper postMapper)
+		IPostMapper postMapper,
+		IConnectivityService connectivityService)
 	{
 		_logger = logger;
 		_postApi = postApi;
 		_postRepository = postRepository;
 		_postMapper = postMapper;
+		_connectivityService = connectivityService;
 	}
 
 	public async Task<Result<IEnumerable<PostEntity>>> GetPosts()
 	{
 		try
 		{
-			IEnumerable<PostDataContract> posts = await _postApi.GetPosts();
-			IList<PostEntity> postEntities = posts.Select(_postMapper.Map).ToList();
+			IEnumerable<PostEntity> savedEntities;
 
-			IEnumerable<PostEntity> previousPosts = _postRepository.GetAll();
-			_postRepository.RemoveAll(previousPosts);
-			_postRepository.AddAll(postEntities);
+			if (!_connectivityService.IsInternetConnected)
+			{
+				savedEntities = _postRepository.GetAll();
+				return new Success<IEnumerable<PostEntity>>(savedEntities);
+			}
+
+			IEnumerable<PostDataContract> contracts = await _postApi.GetPosts();
+			IList<PostEntity> entities = contracts.Select(_postMapper.Map).ToList();
+
+			savedEntities = _postRepository.GetAll();
+			_postRepository.RemoveAll(savedEntities);
+			_postRepository.AddAll(entities);
 			await _postRepository.SaveChanges();
 
-			return new Success<IEnumerable<PostEntity>>(postEntities);
+			return new Success<IEnumerable<PostEntity>>(entities);
 		}
 		catch (Exception ex)
 		{

@@ -45,6 +45,7 @@ public class CoreModule : Module
 			.SingleInstance();
 
 		builder.RegisterType<PathProvider>().As<IPathProvider>().SingleInstance();
+		builder.RegisterType<ConnectivityService>().As<IConnectivityService>().SingleInstance();
 	}
 
 	private static void RegisterPresentation(ContainerBuilder builder)

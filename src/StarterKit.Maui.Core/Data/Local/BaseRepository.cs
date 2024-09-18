@@ -1,9 +1,10 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using StarterKit.Maui.Core.Domain.Models;
 
 namespace StarterKit.Maui.Core.Data.Local;
 
-public abstract class BaseRepository<T> : IRepository<T> where T : class
+public abstract class BaseRepository<T> : IRepository<T> where T : class, IEntity
 {
 	private const int SqliteGenericErrorCode = 1;
 

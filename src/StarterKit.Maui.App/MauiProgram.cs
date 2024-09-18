@@ -21,12 +21,12 @@ public static class MauiProgram
 			})
 			.ConfigureContainer(new AutofacServiceProviderFactory(AutofacBootstrapper.RegisterAutofacModules));
 
-#if DEBUG
+#if !RELEASE
 		builder.Logging.AddDebug();
 #endif
 
 		MauiApp app = builder.Build();
-		ServiceLocator.ServiceProvider = app.Services;
+		ServiceLocator.Initialize(app.Services);
 
 		return app;
 	}

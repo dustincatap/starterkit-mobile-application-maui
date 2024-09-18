@@ -1,6 +1,8 @@
-﻿namespace StarterKit.Maui.Core.Data.Local;
+﻿using StarterKit.Maui.Core.Domain.Models;
 
-public interface IRepository<T> where T : class
+namespace StarterKit.Maui.Core.Data.Local;
+
+public interface IRepository<T> where T : class, IEntity
 {
 	T? Get(Predicate<T> filter);
 
