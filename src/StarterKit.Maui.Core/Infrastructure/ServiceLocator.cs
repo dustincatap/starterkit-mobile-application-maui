@@ -1,8 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿namespace StarterKit.Maui.Core.Infrastructure;
 
-namespace StarterKit.Maui.Core.Infrastructure;
-
-[ExcludeFromCodeCoverage]
 public static class ServiceLocator
 {
 	private static IServiceProvider? ServiceProvider;

@@ -6,8 +6,6 @@ namespace StarterKit.Maui.Core.Data.Local;
 
 public abstract class BaseRepository<T> : IRepository<T> where T : class, IEntity
 {
-	private const int SqliteGenericErrorCode = 1;
-
 	private readonly DbContext _context;
 
 	protected BaseRepository(DbContext context)

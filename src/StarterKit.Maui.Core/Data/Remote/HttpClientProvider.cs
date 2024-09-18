@@ -1,10 +1,8 @@
 ﻿using Refit;
 using StarterKit.Maui.Core.Infrastructure.Environment;
-using System.Diagnostics.CodeAnalysis;
 
 namespace StarterKit.Maui.Core.Data.Remote;
 
-[ExcludeFromCodeCoverage]
 public class HttpClientProvider
 {
 	private readonly IHttpMessageHandlerProvider _httpMessageHandlerProvider;

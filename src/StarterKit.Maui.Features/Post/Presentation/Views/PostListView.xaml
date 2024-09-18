@@ -45,11 +45,11 @@
                      Binding="{Binding State, Converter={StaticResource ObjectToTypeConverter}}"
                      Value="{x:Type models:PostsListErrorState}">
             <Setter Property="Content">
-                <StackLayout>
-                    <Label Text="An error occurred while loading posts."
-                           VerticalOptions="Center"
-                           HorizontalOptions="Center" />
-                </StackLayout>
+                <Label x:DataType="models:PostsListErrorState"
+                       BindingContext="{Binding State}"
+                       Text="{Binding ErrorMessage}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center" />
             </Setter>
         </DataTrigger>
 

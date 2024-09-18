@@ -1,8 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿namespace StarterKit.Maui.Core.Infrastructure.Platform;
 
-namespace StarterKit.Maui.Core.Infrastructure.Platform;
-
-[ExcludeFromCodeCoverage]
 public class PathProvider : IPathProvider
 {
 	public string CacheFolderPath => FileSystem.CacheDirectory;

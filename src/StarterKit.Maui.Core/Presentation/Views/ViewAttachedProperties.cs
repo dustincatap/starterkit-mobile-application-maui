@@ -1,8 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿namespace StarterKit.Maui.Core.Presentation.Views;
 
-namespace StarterKit.Maui.Core.Presentation.Views;
-
-[ExcludeFromCodeCoverage]
 public static class ViewAttachedProperties
 {
 	private static readonly BindableProperty NameProperty =

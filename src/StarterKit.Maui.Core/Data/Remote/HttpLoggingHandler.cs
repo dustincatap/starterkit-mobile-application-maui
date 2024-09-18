@@ -1,10 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Headers;
 
 namespace StarterKit.Maui.Core.Data.Remote;
 
-[ExcludeFromCodeCoverage]
 public class HttpLoggingHandler : DelegatingHandler
 {
 	private readonly string[] _types = ["html", "text", "xml", "json", "txt", "x-www-form-urlencoded"];

@@ -1,14 +1,20 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Text;
 using System.Text.Json;
 
 namespace StarterKit.Maui.Core.Infrastructure.Resource;
 
-[ExcludeFromCodeCoverage]
 public class EmbeddedResourceReader : IEmbeddedResourceReader
 {
-	public string ReadAsString(string name, Type assemblyClass)
+	public T? ReadAs<T>(string name, Type assemblyClass)
+	{
+		string value = ReadAsString(name, assemblyClass);
+		T? deserializedValue = JsonSerializer.Deserialize<T>(value);
+
+		return deserializedValue;
+	}
+
+	private static string ReadAsString(string name, Type assemblyClass)
 	{
 		try
 		{
@@ -28,13 +34,5 @@ public class EmbeddedResourceReader : IEmbeddedResourceReader
 		{
 			throw new InvalidOperationException($"Could not read {name} file", ex);
 		}
-	}
-
-	public T? ReadAs<T>(string name, Type assemblyClass)
-	{
-		string value = ReadAsString(name, assemblyClass);
-		T? deserializedValue = JsonSerializer.Deserialize<T>(value);
-
-		return deserializedValue;
 	}
 }

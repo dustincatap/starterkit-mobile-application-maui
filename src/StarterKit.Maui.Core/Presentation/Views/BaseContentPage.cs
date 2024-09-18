@@ -1,10 +1,8 @@
 ﻿using StarterKit.Maui.Core.Infrastructure;
 using StarterKit.Maui.Core.Presentation.Navigation;
-using System.Diagnostics.CodeAnalysis;
 
 namespace StarterKit.Maui.Core.Presentation.Views;
 
-[ExcludeFromCodeCoverage]
 public abstract class BaseContentPage<T> : ContentPage where T : class
 {
 	private readonly INavigationService _navigationService;

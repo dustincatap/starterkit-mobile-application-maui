@@ -1,5 +1,5 @@
-# Remove the line below if you want to inherit .editorconfig settings from higher directories
 root = true
+# Remove the line below if you want to inherit .editorconfig settings from higher directories
 
 # C# files
 [*.cs]
@@ -7,7 +7,7 @@ root = true
 #### Core EditorConfig Options ####
 
 # Indentation and spacing
-indent_size = 4
+indent_size = tab
 indent_style = tab
 tab_width = 4
 
@@ -19,7 +19,7 @@ insert_final_newline = true
 # Organize usings
 dotnet_separate_import_directive_groups = false
 dotnet_sort_system_directives_first = false
-file_header_template = unset
+file_header_template =
 
 # this. and Me. preferences
 dotnet_style_qualification_for_event = false
@@ -64,7 +64,7 @@ dotnet_style_prefer_simplified_interpolation = true
 dotnet_style_readonly_field = true
 
 # Parameter preferences
-dotnet_code_quality_unused_parameters = all:silent
+dotnet_code_quality_unused_parameters = all:warning
 
 # Suppression preferences
 dotnet_remove_unnecessary_suppression_exclusions = none
@@ -103,12 +103,13 @@ csharp_style_conditional_delegate_call = true
 
 # Modifier preferences
 csharp_prefer_static_local_function = true
-csharp_preferred_modifier_order = public,private,protected,internal,file,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,required,volatile,async
+csharp_preferred_modifier_order = public,private,protected,internal,file,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,required,volatile,async  # A property with the same name was updated with a value protected, public, private, internal, override, required, extern, new, virtual, sealed, abstract, file, async, unsafe, static, volatile, readonly:suggestion in a section [*] # A property with the same name was updated with a value public, private, protected, internal, file, static, extern, new, virtual, abstract, sealed, override, readonly, unsafe, required, volatile, async:suggestion in a section [*] # A property with the same name was updated with a value protected, public, private, internal, override, required, extern, new, virtual, sealed, abstract, file, async, unsafe, static, volatile, readonly:suggestion in a section [*]
 csharp_style_prefer_readonly_struct = true
 csharp_style_prefer_readonly_struct_member = true
 
 # Code-block preferences
 csharp_prefer_braces = true
+csharp_braces_for_ifelse = true
 csharp_prefer_simple_using_statement = true
 csharp_style_namespace_declarations = file_scoped:warning
 csharp_style_prefer_method_group_conversion = true
@@ -187,6 +188,17 @@ csharp_space_between_square_brackets = false
 csharp_preserve_single_line_blocks = true
 csharp_preserve_single_line_statements = true
 
+# Other
+csharp_for_built_in_types = use_explicit_type
+csharp_for_simple_types = use_explicit_type
+csharp_for_other_types = use_explicit_type
+csharp_prefer_explicit_discard_declaration = false
+csharp_instance_members_qualify_members = none
+csharp_object_creation_when_type_evident = explicitly_typed
+csharp_object_creation_when_type_not_evident = explicitly_typed
+csharp_place_simple_initializer_on_single_line = false
+csharp_max_initializer_elements_on_line = 0
+
 #### Naming styles ####
 
 # Naming rules
@@ -248,3 +260,40 @@ dotnet_naming_symbols.private_fields.applicable_accessibilities = private
 
 dotnet_naming_style.start_with_underscore.required_prefix = _
 dotnet_naming_style.start_with_underscore.capitalization = camel_case
+
+# ReSharper
+
+resharper_convert_to_primary_constructor_highlighting = none
+resharper_redundant_type_specification_highlighting = none
+
+[*]
+
+# Microsoft .NET properties
+csharp_preferred_modifier_order = protected, public, private, internal, override, required, extern, new, virtual, sealed, abstract, file, async, unsafe, static, volatile, readonly:suggestionpublic, private, protected, internal, file, static, extern, new, virtual, abstract, sealed, override, readonly, unsafe, required, volatile, async:suggestionprotected, public, private, internal, override, required, extern, new, virtual, sealed, abstract, file, async, unsafe, static, volatile, readonly:suggestion
+csharp_preserve_single_line_blocks = true
+dotnet_sort_system_directives_first = false
+
+# ReSharper properties
+resharper_blank_lines_before_block_statements = 1
+resharper_blank_lines_before_case = 1
+resharper_braces_for_foreach = required
+resharper_braces_for_ifelse = required
+resharper_braces_redundant = false
+resharper_csharp_alignment_tab_fill_style = optimal_fill
+resharper_csharp_blank_lines_around_single_line_invocable = 1
+resharper_csharp_indent_style = tab
+resharper_csharp_insert_final_newline = true
+resharper_csharp_max_line_length = 144
+resharper_csharp_wrap_parameters_style = chop_if_long
+resharper_csharp_wrap_ternary_expr_style = chop_always
+resharper_instance_members_qualify_declared_in =
+resharper_parentheses_redundancy_style = remove
+resharper_place_accessorholder_attribute_on_same_line = false
+resharper_place_expr_method_on_single_line = true
+resharper_place_expr_property_on_single_line = false
+resharper_csharp_place_simple_initializer_on_single_line = false
+resharper_place_simple_initializer_on_single_line = false
+resharper_place_simple_list_pattern_on_single_line = false
+resharper_wrap_list_pattern = chop_if_long
+resharper_arrange_object_creation_when_type_evident_highlighting = none
+resharper_csharp_braces_for_ifelse = required

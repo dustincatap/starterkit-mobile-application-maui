@@ -10,17 +10,17 @@ public interface INavigationService
 
 	string CurrentViewName { get; }
 
-	Task<Result> PushToNewRoot(string viewName);
+	Task PushToNewRoot(string viewName);
 
-	Task<Result> PushToNewRoot(string viewName, object? parameter);
+	Task PushToNewRoot(string viewName, object? parameter);
 
-	Task<Result> Push(string viewName, object? parameter = null);
+	Task Push(string viewName, object? parameter = null);
 
-	Task<Result<T?>> Push<T>(string viewName, object? parameter = null) where T : class;
+	Task<T?> Push<T>(string viewName, object? parameter = null) where T : class;
 
-	Task<Result> Pop();
+	Task Pop();
 
-	Task<Result> Pop(object? result);
+	Task Pop(object? result);
 
-	Task<Result> PopToRoot();
+	Task PopToRoot();
 }

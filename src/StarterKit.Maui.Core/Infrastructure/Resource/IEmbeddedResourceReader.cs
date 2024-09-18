@@ -2,7 +2,5 @@
 
 public interface IEmbeddedResourceReader
 {
-	string ReadAsString(string name, Type assemblyClass);
-
 	T? ReadAs<T>(string name, Type assemblyClass);
 }

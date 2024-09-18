@@ -1,13 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
-using StarterKit.Maui.Core.Domain.Models;
+using StarterKit.Maui.Core.Domain.Exceptions;
 using StarterKit.Maui.Core.Infrastructure;
 using StarterKit.Maui.Core.Presentation.ViewModels;
 using StarterKit.Maui.Core.Presentation.Views;
-using System.Diagnostics.CodeAnalysis;
 
 namespace StarterKit.Maui.Core.Presentation.Navigation;
 
-[ExcludeFromCodeCoverage]
 public class NavigationService : INavigationService
 {
 	private static INavigation Navigation => Application.Current?.MainPage?.Navigation ??
@@ -37,19 +35,12 @@ public class NavigationService : INavigationService
 		}
 	}
 
-	public async Task<Result> Push(string viewName, object? parameter = null)
+	public async Task Push(string viewName, object? parameter = null)
 	{
-		Result<object?> result = await Push<object>(viewName, parameter);
-
-		return result switch
-		{
-			Success<object?> => new Success(),
-			Failure<object?> failure => new Failure(failure.Exception),
-			_ => new Failure(new InvalidOperationException("Unexpected result type"))
-		};
+		await Push<object>(viewName, parameter);
 	}
 
-	public async Task<Result<T?>> Push<T>(string viewName, object? parameter = null) where T : class
+	public async Task<T?> Push<T>(string viewName, object? parameter = null) where T : class
 	{
 		try
 		{
@@ -66,7 +57,7 @@ public class NavigationService : INavigationService
 
 			if (result is T typedResult)
 			{
-				return new Success<T?>(typedResult);
+				return typedResult;
 			}
 
 			if (result is not null)
@@ -75,35 +66,30 @@ public class NavigationService : INavigationService
 					result.GetType());
 			}
 
-			return new Success<T?>(null);
+			return null;
 		}
 		catch (Exception ex)
 		{
-			_logger.LogError(ex, "Failed to push {ViewName}", viewName);
-			return new Failure<T?>(ex);
+			NavigationException navEx = new NavigationException($"Failed to push {viewName}", ex);
+			_logger.LogError(navEx, "Failed to push {ViewName}", viewName);
+
+			throw navEx;
 		}
 	}
 
-	public async Task<Result> PushToNewRoot(string viewName)
+	public async Task PushToNewRoot(string viewName)
 	{
-		Result result = await PushToNewRoot(viewName, null);
-
-		return result switch
-		{
-			Success => new Success(),
-			Failure failure => new Failure(failure.Exception),
-			_ => new Failure(new InvalidOperationException("Unexpected result type"))
-		};
+		await PushToNewRoot(viewName, null);
 	}
 
-	public async Task<Result> PushToNewRoot(string viewName, object? parameter)
+	public async Task PushToNewRoot(string viewName, object? parameter)
 	{
 		try
 		{
 			if (Navigation.NavigationStack.Count == 0)
 			{
 				await Push(viewName, parameter);
-				return new Success();
+				return;
 			}
 
 			Page page = GetPage(viewName);
@@ -115,29 +101,22 @@ public class NavigationService : INavigationService
 
 			Pushed?.Invoke(this, viewName);
 			_logger.LogInformation("Pushed to new root {ViewName}", viewName);
-
-			return new Success();
 		}
 		catch (Exception ex)
 		{
-			_logger.LogError(ex, "Failed to push to new root {ViewName}", viewName);
-			return new Failure(ex);
+			NavigationException navEx = new NavigationException($"Failed to push to new root {viewName}", ex);
+			_logger.LogError(navEx, "Failed to push to new root {ViewName}", viewName);
+
+			throw navEx;
 		}
 	}
 
-	public async Task<Result> Pop()
+	public async Task Pop()
 	{
-		Result result = await Pop(null);
-
-		return result switch
-		{
-			Success => new Success(),
-			Failure failure => new Failure(failure.Exception),
-			_ => new Failure(new InvalidOperationException("Unexpected result type"))
-		};
+		await Pop(null);
 	}
 
-	public async Task<Result> Pop(object? result)
+	public async Task Pop(object? result)
 	{
 		try
 		{
@@ -147,22 +126,22 @@ public class NavigationService : INavigationService
 			if (poppedPage is null)
 			{
 				_logger.LogWarning("Failed to pop {ViewName}", viewNameToPop);
-				return new Failure(new InvalidOperationException("Failed to pop"));
+				return;
 			}
 
 			HandlePoppedPage(poppedPage);
 			_logger.LogInformation("Popped {ViewName}", viewNameToPop);
-
-			return new Success();
 		}
 		catch (Exception ex)
 		{
-			_logger.LogError(ex, "Failed to pop");
-			return new Failure(ex);
+			NavigationException navEx = new NavigationException($"Failed to pop {CurrentViewName}", ex);
+			_logger.LogError(navEx, "Failed to pop {ViewName}", CurrentViewName);
+
+			throw navEx;
 		}
 	}
 
-	public async Task<Result> PopToRoot()
+	public async Task PopToRoot()
 	{
 		try
 		{
@@ -172,13 +151,13 @@ public class NavigationService : INavigationService
 			await Navigation.PopToRootAsync();
 			pagesToPop.ForEach(HandlePoppedPage);
 			_logger.LogInformation("Popped to root {RootViewName}", CurrentViewName);
-
-			return new Success();
 		}
 		catch (Exception ex)
 		{
-			_logger.LogError(ex, "Failed to pop to root");
-			return new Failure(ex);
+			NavigationException navEx = new NavigationException("Failed to pop to root", ex);
+			_logger.LogError(navEx, "Failed to pop to root");
+
+			throw navEx;
 		}
 	}
 
@@ -220,7 +199,7 @@ public class NavigationService : INavigationService
 
 		try
 		{
-			initialize.OnInitialize(parameter);
+			MainThread.BeginInvokeOnMainThread(() => initialize.OnInitialize(parameter));
 		}
 		catch (Exception ex)
 		{
@@ -238,7 +217,7 @@ public class NavigationService : INavigationService
 
 		try
 		{
-			cleanup.OnCleanup();
+			MainThread.BeginInvokeOnMainThread(() => cleanup.OnCleanup());
 		}
 		catch (Exception ex)
 		{
