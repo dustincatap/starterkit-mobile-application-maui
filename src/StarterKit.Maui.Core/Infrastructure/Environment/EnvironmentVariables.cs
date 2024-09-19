@@ -18,4 +18,6 @@ public class EnvironmentVariables : IEnvironmentVariables
 	public required bool IsDeveloperFeaturesEnabled { get; init; }
 
 	public required string ApiBaseUrl { get; init; }
+
+	public required string DatabaseCipherKey { get; init; }
 }

@@ -43,14 +43,19 @@ public class PostServiceTest
 	public async Task GetPosts_ShouldReturnSuccessResultWithPosts_WhenInternetIsConnected()
 	{
 		PostDataContract postContract = new PostDataContract(1, "Title", "Body");
-		PostEntity postEntity = new PostEntity { Id = 1, Title = "Title", Body = "Body" };
+		PostEntity postEntity = new PostEntity
+		{
+			Id = 1,
+			Title = "Title",
+			Body = "Body"
+		};
 		List<PostDataContract> postContracts = [postContract];
 		List<PostEntity> postEntities = [postEntity];
 
 		_connectivityServiceMock.SetupGet(x => x.IsInternetConnected).Returns(true);
 		_postApiMock.Setup(x => x.GetPosts()).ReturnsAsync(postContracts);
 		_postMapperMock.Setup(x => x.Map(postContract)).Returns(postEntity);
-		_postRepositoryMock.Setup(x => x.GetAll()).Returns(new List<PostEntity>());
+		_postRepositoryMock.Setup(x => x.GetAll()).ReturnsAsync(new List<PostEntity>());
 
 		PostService postService = CreateUnitUnderTest();
 		Result<IEnumerable<PostEntity>> result = await postService.GetPosts();
@@ -59,19 +64,23 @@ public class PostServiceTest
 		Success<IEnumerable<PostEntity>>? successResult = result as Success<IEnumerable<PostEntity>>;
 		successResult!.Value.ShouldBeEquivalentTo(postEntities);
 
-		_postRepositoryMock.Verify(x => x.RemoveAll(It.IsAny<IEnumerable<PostEntity>>()), Times.Once);
+		_postRepositoryMock.Verify(x => x.RemoveAll(), Times.Once);
 		_postRepositoryMock.Verify(x => x.AddAll(postEntities), Times.Once);
-		_postRepositoryMock.Verify(x => x.SaveChanges(), Times.Once);
 	}
 
 	[Test]
 	public async Task GetPosts_ShouldReturnSuccessResultWithPostsFromCache_WhenInternetIsNotConnected()
 	{
-		PostEntity postEntity = new PostEntity { Id = 1, Title = "Title", Body = "Body" };
+		PostEntity postEntity = new PostEntity
+		{
+			Id = 1,
+			Title = "Title",
+			Body = "Body"
+		};
 		List<PostEntity> postEntities = [postEntity];
 
 		_connectivityServiceMock.SetupGet(x => x.IsInternetConnected).Returns(false);
-		_postRepositoryMock.Setup(x => x.GetAll()).Returns(postEntities);
+		_postRepositoryMock.Setup(x => x.GetAll()).ReturnsAsync(postEntities);
 
 		PostService postService = CreateUnitUnderTest();
 		Result<IEnumerable<PostEntity>> result = await postService.GetPosts();
@@ -81,9 +90,8 @@ public class PostServiceTest
 		successResult!.Value.ShouldBeEquivalentTo(postEntities);
 
 		_postRepositoryMock.Verify(x => x.GetAll(), Times.Once);
-		_postRepositoryMock.Verify(x => x.RemoveAll(It.IsAny<IEnumerable<PostEntity>>()), Times.Never);
+		_postRepositoryMock.Verify(x => x.RemoveAll(), Times.Never);
 		_postRepositoryMock.Verify(x => x.AddAll(It.IsAny<IEnumerable<PostEntity>>()), Times.Never);
-		_postRepositoryMock.Verify(x => x.SaveChanges(), Times.Never);
 	}
 
 	[Test]

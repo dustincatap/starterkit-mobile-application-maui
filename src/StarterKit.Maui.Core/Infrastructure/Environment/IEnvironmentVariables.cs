@@ -15,4 +15,6 @@ public interface IEnvironmentVariables
 	bool IsDeveloperFeaturesEnabled { get; }
 
 	string ApiBaseUrl { get; }
+	
+	string DatabaseCipherKey { get; }
 }

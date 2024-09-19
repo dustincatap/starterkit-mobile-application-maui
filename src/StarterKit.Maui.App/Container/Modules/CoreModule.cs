@@ -1,6 +1,6 @@
 ﻿using Autofac;
-using Microsoft.EntityFrameworkCore;
 using StarterKit.Maui.App.Database;
+using StarterKit.Maui.Core.Data.Local;
 using StarterKit.Maui.Core.Data.Remote;
 using StarterKit.Maui.Core.Infrastructure.Environment;
 using StarterKit.Maui.Core.Infrastructure.Platform;
@@ -27,8 +27,8 @@ public class CoreModule : Module
 			.SingleInstance();
 
 		builder.RegisterType<HttpClientProvider>().As<HttpClientProvider>().SingleInstance();
-
-		builder.RegisterType<AppDbContext>().As<DbContext>().InstancePerDependency();
+		builder.RegisterType<AppDatabase>().As<IAppDatabase>().SingleInstance();
+		builder.RegisterType<DbConnectionFactory>().As<IDbConnectionFactory>().SingleInstance();
 	}
 
 	private static void RegisterInfrastructure(ContainerBuilder builder)

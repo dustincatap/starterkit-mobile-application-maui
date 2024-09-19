@@ -1,4 +1,5 @@
 ﻿using Equatable.Attributes;
+using SQLite;
 using StarterKit.Maui.Core.Domain.Models;
 
 namespace StarterKit.Maui.Features.Post.Domain.Models;
@@ -6,11 +7,12 @@ namespace StarterKit.Maui.Features.Post.Domain.Models;
 [Equatable]
 public partial class PostEntity : IEntity
 {
-	public required int Id { get; init; }
+	[PrimaryKey]
+	public int Id { get; init; }
 
 	[IgnoreEquality]
-	public required string Title { get; init; }
+	public string? Title { get; set; }
 
 	[IgnoreEquality]
-	public required string Body { get; init; }
+	public string? Body { get; set; }
 }

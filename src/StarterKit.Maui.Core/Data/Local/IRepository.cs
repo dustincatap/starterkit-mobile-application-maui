@@ -2,25 +2,23 @@
 
 namespace StarterKit.Maui.Core.Data.Local;
 
-public interface IRepository<T> where T : class, IEntity
+public interface IRepository<T> where T : class, IEntity, new()
 {
-	T? Get(Predicate<T> filter);
+	Task<T?> Get(Predicate<T> filter);
 
-	IEnumerable<T> GetAll();
+	Task<IEnumerable<T>> GetAll();
 
-	IEnumerable<T> GetAll(Predicate<T> filter);
+	Task<IEnumerable<T>> GetAll(Predicate<T> filter);
 
-	void Add(T entity);
+	Task Add(T entity);
 
-	void AddAll(IEnumerable<T> entities);
+	Task AddAll(IEnumerable<T> entities);
 
-	void Update(T entity);
+	Task Update(T entity);
 
-	void UpdateAll(IEnumerable<T> entities);
+	Task UpdateAll(IEnumerable<T> entities);
 
-	void Remove(T entity);
+	Task Remove(T entity);
 
-	void RemoveAll(IEnumerable<T> entities);
-
-	Task<int> SaveChanges();
+	Task RemoveAll();
 }

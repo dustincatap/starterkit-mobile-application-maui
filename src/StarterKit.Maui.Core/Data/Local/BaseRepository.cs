@@ -1,95 +1,67 @@
-﻿using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
+﻿using SQLite;
 using StarterKit.Maui.Core.Domain.Models;
 
 namespace StarterKit.Maui.Core.Data.Local;
 
-public abstract class BaseRepository<T> : IRepository<T> where T : class, IEntity
+public abstract class BaseRepository<T> : IRepository<T> where T : class, IEntity, new()
 {
-	private readonly DbContext _context;
+	private readonly IAppDatabase _database;
 
-	protected BaseRepository(DbContext context)
+	protected BaseRepository(IAppDatabase database)
 	{
-		_context = context;
+		_database = database;
 	}
 
-	// DbSet should be a getter to get the latest entities from the database
-	// instead of initializing it in the constructor.
-	private DbSet<T> DbSet => _context.Set<T>();
-
-	// Enumerate entities as another collection if we are going to use LINQ
-	// See https://learn.microsoft.com/en-us/answers/questions/530674/resolve-exception-firstordefault-could-not-be-tran
-	// and https://learn.microsoft.com/en-us/ef/core/what-is-new/ef-core-3.x/breaking-changes#linq-queries-are-no-longer-evaluated-on-the-client
-	private IEnumerable<T> Entities => TryExecute(dbSet => dbSet.ToList());
-
-	public T? Get(Predicate<T> filter)
+	public async Task<T?> Get(Predicate<T> filter)
 	{
-		return Entities.FirstOrDefault(x => filter(x));
+		T? entity = await TryExecute(conn => conn.Table<T>().Where(x => filter(x)).FirstOrDefaultAsync());
+		return entity;
 	}
 
-	public IEnumerable<T> GetAll()
+	public async Task<IEnumerable<T>> GetAll()
 	{
-		return Entities;
+		IEnumerable<T> entities = await TryExecute(dbSet => dbSet.Table<T>().ToListAsync());
+		return entities;
 	}
 
-	public IEnumerable<T> GetAll(Predicate<T> filter)
+	public async Task<IEnumerable<T>> GetAll(Predicate<T> filter)
 	{
-		return Entities.Where(x => filter(x));
+		IEnumerable<T> entities = await TryExecute(conn => conn.Table<T>().Where(x => filter(x)).ToListAsync());
+		return entities;
 	}
 
-	public void Add(T entity)
+	public async Task Add(T entity)
 	{
-		TryExecute(dbSet => dbSet.Add(entity));
+		await TryExecute(conn => conn.InsertAsync(entity));
 	}
 
-	public void AddAll(IEnumerable<T> entities)
+	public async Task AddAll(IEnumerable<T> entities)
 	{
-		TryExecute(dbSet => dbSet.AddRange(entities));
+		await TryExecute(conn => conn.InsertAllAsync(entities));
 	}
 
-	public void Update(T entity)
+	public async Task Update(T entity)
 	{
-		TryExecute(dbSet => dbSet.Update(entity));
+		await TryExecute(conn => conn.UpdateAsync(entity));
 	}
 
-	public void UpdateAll(IEnumerable<T> entities)
+	public async Task UpdateAll(IEnumerable<T> entities)
 	{
-		TryExecute(dbSet => dbSet.UpdateRange(entities));
+		await TryExecute(conn => conn.UpdateAllAsync(entities));
 	}
 
-	public void Remove(T entity)
+	public async Task Remove(T entity)
 	{
-		TryExecute(dbSet => dbSet.Remove(entity));
+		await TryExecute(conn => conn.DeleteAsync(entity));
 	}
 
-	public void RemoveAll(IEnumerable<T> entities)
+	public async Task RemoveAll()
 	{
-		TryExecute(dbSet => dbSet.RemoveRange(entities));
+		await TryExecute(conn => conn.DeleteAllAsync<T>());
 	}
 
-	public Task<int> SaveChanges()
+	private TResult TryExecute<TResult>(Func<SQLiteAsyncConnection, TResult> action)
 	{
-		return TryExecute(_ => _context.SaveChangesAsync());
-	}
-
-	private void TryExecute(Action<DbSet<T>> action)
-	{
-		TryExecute(dbSet =>
-		{
-			action.Invoke(dbSet);
-			return true;
-		});
-	}
-
-	private TResult TryExecute<TResult>(Func<DbSet<T>, TResult> action)
-	{
-		try
-		{
-			return action.Invoke(DbSet);
-		}
-		catch (SqliteException ex)
-		{
-			throw new InvalidOperationException("An error occurred while executing the db action", ex);
-		}
+		return _database.TryExecute(action);
 	}
 }

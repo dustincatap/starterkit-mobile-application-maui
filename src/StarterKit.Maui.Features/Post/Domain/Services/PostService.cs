@@ -33,21 +33,17 @@ public class PostService : IPostService
 	{
 		try
 		{
-			IEnumerable<PostEntity> savedEntities;
-
 			if (!_connectivityService.IsInternetConnected)
 			{
-				savedEntities = _postRepository.GetAll();
+				IEnumerable<PostEntity> savedEntities = await _postRepository.GetAll();
 				return new Success<IEnumerable<PostEntity>>(savedEntities);
 			}
 
 			IEnumerable<PostDataContract> contracts = await _postApi.GetPosts();
 			IList<PostEntity> entities = contracts.Select(_postMapper.Map).ToList();
 
-			savedEntities = _postRepository.GetAll();
-			_postRepository.RemoveAll(savedEntities);
-			_postRepository.AddAll(entities);
-			await _postRepository.SaveChanges();
+			await _postRepository.RemoveAll();
+			await _postRepository.AddAll(entities);
 
 			return new Success<IEnumerable<PostEntity>>(entities);
 		}
